@@ -1,4 +1,5 @@
-﻿using Biohazrd;
+﻿#define USE_TOP_LEVEL_STATEMENTS
+using Biohazrd;
 using Biohazrd.CSharp;
 using Biohazrd.OutputGeneration;
 using Biohazrd.Transformation.Common;
@@ -7,6 +8,13 @@ using InfectedImGui.Generator;
 using System;
 using System.Collections.Immutable;
 using System.IO;
+
+#if !USE_TOP_LEVEL_STATEMENTS
+public static class Program
+{
+    public static void Main(string[] args)
+    {
+#endif
 
 if (args.Length != 2)
 {
@@ -133,3 +141,8 @@ using StreamWriter diagnosticsOutput = outputSession.Open<StreamWriter>("Diagnos
 diagnostics.WriteOutDiagnostics(diagnosticsOutput, writeToConsole: true);
 
 outputSession.Dispose();
+
+#if !USE_TOP_LEVEL_STATEMENTS
+    }
+}
+#endif

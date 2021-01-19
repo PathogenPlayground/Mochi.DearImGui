@@ -68,5 +68,8 @@ namespace InfectedImGui.Generator
             // Return the result
             return result;
         }
+
+        public override string ToString()
+            => $"ImVec<{ElementType}>";
     }
 }
