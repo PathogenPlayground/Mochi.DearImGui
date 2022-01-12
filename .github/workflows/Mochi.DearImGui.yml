@@ -209,9 +209,9 @@ jobs:
           name: Mochi.DearImGui.OpenTK
       - name: Extract built binaries
         run: |
-          tar --keep-old-files -xf Mochi.DearImGui.OpenTK-win-x64.tar.gz
+          tar --keep-old-files -xvf Mochi.DearImGui.OpenTK-win-x64.tar.gz
           mkdir Mochi.DearImGui.OpenTK-linux-x64
-          tar --keep-old-files -xf Mochi.DearImGui.OpenTK-linux-x64.tar.gz --directory=Mochi.DearImGui.OpenTK-linux-x64
+          tar --keep-old-files -xvf Mochi.DearImGui.OpenTK-linux-x64.tar.gz --directory=Mochi.DearImGui.OpenTK-linux-x64
 
       # ----------------------------------------------------------------------- Pack Mochi.DearImGui.OpenTK
       - name: Restore Mochi.DearImGui.OpenTK
@@ -256,7 +256,7 @@ jobs:
         with:
           name: Packages
       - name: Extract built packages
-        run: for archive in Mochi.DearImGui*-packages-*.tar.gz; do tar --keep-old-files -xf "$archive"; done
+        run: for archive in Mochi.DearImGui*-packages*.tar.gz; do tar --keep-old-files -xvf "$archive"; done
 
       # ----------------------------------------------------------------------- Push to GitHub Packages
       - name: Push to GitHub Packages
@@ -290,7 +290,7 @@ jobs:
         with:
           name: Packages
       - name: Extract built packages
-        run: for archive in Mochi.DearImGui*-packages-*.tar.gz; do tar --keep-old-files -xf "$archive"; done
+        run: for archive in Mochi.DearImGui*-packages*.tar.gz; do tar --keep-old-files -xvf "$archive"; done
 
       # ----------------------------------------------------------------------- Push to NuGet.org
       - name: Push to NuGet.org
