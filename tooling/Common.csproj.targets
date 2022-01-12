@@ -13,7 +13,7 @@
   </Target>
 
   <!-- Use the informational version (which includes the Git revision) for the package version -->
-  <Target Name="UseInformationalVersionForPackageVersion" BeforeTargets="GenerateNuspec;_GetOutputItemsFromPack" DependsOnTargets="AddSourceRevisionToInformationalVersion">
+  <Target Name="UseInformationalVersionForPackageVersion" BeforeTargets="GenerateNuspec;_GetOutputItemsFromPack" DependsOnTargets="AddSourceRevisionToInformationalVersion;InitializeSourceControlInformationFromSourceControlManager">
     <Error Text="SourceRevisionId is missing." Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(SourceRevisionId)' == ''" />
     <PropertyGroup>
       <PackageVersion>$(InformationalVersion)</PackageVersion>
