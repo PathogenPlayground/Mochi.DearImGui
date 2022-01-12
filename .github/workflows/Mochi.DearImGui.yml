@@ -173,9 +173,9 @@ jobs:
           if-no-files-found: error
 
   # =====================================================================================================================================================================
-  # Build Mochi.DearImGui
+  # Pack Multiplatform Packages
   # =====================================================================================================================================================================
-  pack-multiarch-packages:
+  pack-multiplatform-packages:
     name: Pack Mochi.DearImGui.OpenTK
     runs-on: ubuntu-latest
     needs: build-mochi-dearimgui
@@ -223,7 +223,7 @@ jobs:
       # ----------------------------------------------------------------------- Upload artifacts
       - name: Collect NuGet packages
         if: always()
-        run: tar -cvzf Mochi.DearImGui.OpenTK-packages.tar.gz packages
+        run: tar -cvzf Mochi.DearImGui-packages-multiplatform.tar.gz packages
       - name: Upload NuGet packages
         if: always()
         uses: actions/upload-artifact@v2
@@ -238,7 +238,7 @@ jobs:
   publish-packages-github:
     name: Publish to GitHub
     runs-on: ubuntu-latest
-    needs: [build-mochi-dearimgui, pack-multiarch-packages]
+    needs: [build-mochi-dearimgui, pack-multiplatform-packages]
     # Pushes always publish CI packages (configure-build.py will add the branch name to the version string for branches besides main)
     # Published releases always publish packages
     # A manual workflow only publishes packages if explicitly enabled
@@ -256,7 +256,7 @@ jobs:
         with:
           name: Packages
       - name: Extract built packages
-        run: for archive in Mochi.DearImGui*-packages*.tar.gz; do tar --keep-old-files -xvf "$archive"; done
+        run: for archive in Mochi.DearImGui-packages-*.tar.gz; do tar --keep-old-files -xvf "$archive"; done
 
       # ----------------------------------------------------------------------- Push to GitHub Packages
       - name: Push to GitHub Packages
@@ -271,7 +271,7 @@ jobs:
   publish-packages-nuget-org:
     name: Publish to NuGet.org
     runs-on: ubuntu-latest
-    needs: [build-mochi-dearimgui, pack-multiarch-packages]
+    needs: [build-mochi-dearimgui, pack-multiplatform-packages]
     environment: NuGet.org
     # Release builds always publish packages to NuGet.org
     # Workflow dispatch builds will only publish packages if enabled and an explicit version number is given
@@ -290,7 +290,7 @@ jobs:
         with:
           name: Packages
       - name: Extract built packages
-        run: for archive in Mochi.DearImGui*-packages*.tar.gz; do tar --keep-old-files -xvf "$archive"; done
+        run: for archive in Mochi.DearImGui-packages-*.tar.gz; do tar --keep-old-files -xvf "$archive"; done
 
       # ----------------------------------------------------------------------- Push to NuGet.org
       - name: Push to NuGet.org
@@ -305,7 +305,7 @@ jobs:
   publish-release-assets:
     name: Publish Release Assets
     runs-on: ubuntu-latest
-    needs: [build-mochi-dearimgui, pack-multiarch-packages]
+    needs: [build-mochi-dearimgui, pack-multiplatform-packages]
     if: github.event_name == 'release'
     steps:
       # ----------------------------------------------------------------------- Download all artifacts
@@ -357,7 +357,7 @@ jobs:
   # =====================================================================================================================================================================
   send-ci-failure-notification:
     name: Send CI Failure Notification
-    needs: [build-mochi-dearimgui, pack-multiarch-packages, publish-packages-github, publish-packages-nuget-org, publish-release-assets]
+    needs: [build-mochi-dearimgui, pack-multiplatform-packages, publish-packages-github, publish-packages-nuget-org, publish-release-assets]
     if: failure() && github.event_name != 'pull_request'
     continue-on-error: true
     runs-on: ubuntu-latest
