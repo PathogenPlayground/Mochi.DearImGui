@@ -229,7 +229,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Packages
-          path: Mochi.DearImGui.OpenTK-packages.tar.gz
+          path: Mochi.DearImGui-packages-multiplatform.tar.gz
           if-no-files-found: error
 
   # =====================================================================================================================================================================
