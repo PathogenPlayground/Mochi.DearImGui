@@ -26,7 +26,7 @@
     Package Info
     =============================================================================================================== -->
     <IsPackable>true</IsPackable>
-    
+
     <!--
       The package ID includes both the runtime identifier *and* the variant
       It was considered haivng the variant be part of the version, but having it be part of the package ID means that it's possible to reference multiple variants and select between them at runtime.
@@ -37,8 +37,8 @@
 
     <Description>Native runtime support package for Mochi.DearImGui on $(RuntimeIdentifier)</Description>
     <Description Condition="'$(Configuration)' != 'Release'">$(Description) ($(Configuration) variant)</Description>
-    
-    <!-- Apply DearImGUi license and copyright info since the meat of this package is just the native bits of Dear ImGui -->
+
+    <!-- Apply DearImGui license and copyright info since the meat of this package is just the native bits of Dear ImGui -->
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <Authors>Omar Cornut, David Maas, and Contributors</Authors>
@@ -57,7 +57,7 @@
     <AssemblyName>Mochi.DearImGui.Native.DummyAssembly</AssemblyName>
     <PlatformTarget Condition="'$(PlatformTarget)' == ''">$(Platform)</PlatformTarget>
     <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
-    
+
     <!-- Symbol packages only work with portable PDBs, which are .NET-only -->
     <IncludeSymbols>false</IncludeSymbols>
   </PropertyGroup>
