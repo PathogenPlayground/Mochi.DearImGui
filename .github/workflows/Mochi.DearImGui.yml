@@ -151,7 +151,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Packages
+          name: Mochi.DearImGui-packages-${{matrix.rid}}
           path: Mochi.DearImGui-packages-${{matrix.rid}}.tar.gz
           if-no-files-found: error
 
@@ -241,7 +241,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Packages
+          name: Mochi.DearImGui-packages-multiplatform
           path: Mochi.DearImGui-packages-multiplatform.tar.gz
           if-no-files-found: error
 
@@ -267,7 +267,8 @@ jobs:
       - name: Download built packages
         uses: actions/download-artifact@v4
         with:
-          name: Packages
+          pattern:Mochi.DearImGui-packages-*
+          merge-multiple: true
       - name: Extract built packages
         run: for archive in Mochi.DearImGui-packages-*.tar.gz; do tar --keep-old-files -xvf "$archive"; done
 
@@ -301,7 +302,8 @@ jobs:
       - name: Download built packages
         uses: actions/download-artifact@v4
         with:
-          name: Packages
+          pattern:Mochi.DearImGui-packages-*
+          merge-multiple: true
       - name: Extract built packages
         run: for archive in Mochi.DearImGui-packages-*.tar.gz; do tar --keep-old-files -xvf "$archive"; done
 
