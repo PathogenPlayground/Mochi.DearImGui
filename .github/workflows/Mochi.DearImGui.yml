@@ -267,7 +267,7 @@ jobs:
       - name: Download built packages
         uses: actions/download-artifact@v4
         with:
-          pattern:Mochi.DearImGui-packages-*
+          pattern: Mochi.DearImGui-packages-*
           merge-multiple: true
       - name: Extract built packages
         run: for archive in Mochi.DearImGui-packages-*.tar.gz; do tar --keep-old-files -xvf "$archive"; done
@@ -302,7 +302,7 @@ jobs:
       - name: Download built packages
         uses: actions/download-artifact@v4
         with:
-          pattern:Mochi.DearImGui-packages-*
+          pattern: Mochi.DearImGui-packages-*
           merge-multiple: true
       - name: Extract built packages
         run: for archive in Mochi.DearImGui-packages-*.tar.gz; do tar --keep-old-files -xvf "$archive"; done
